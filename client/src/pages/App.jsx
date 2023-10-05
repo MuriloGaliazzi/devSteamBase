@@ -5,7 +5,15 @@ import Subtitle from "../components/forms/subtitle/subtitle";
 import Nav from "../components/nav/Nav";
 import "./App.css";
 
+import { cartState } from "/src/atoms/cart";
+import { useRecoilState } from "recoil";
+
 const App = () => {
+  const [cart, setCart] = useRecoilState(cartState);
+
+  const handleAddProduct = (info) => {
+    setCart([...cart, info]);
+  };
   return (
     <div>
       <Nav />
@@ -17,6 +25,11 @@ const App = () => {
             title={"league-of-legends"}
             fullPrice={199.9}
             discount={30}
+            onAdd={() => handleAddProduct({
+              name: "League of Legends",
+              price: 99.9,
+              img: "league-of-legends"
+            })}
           />
           <SaleCard title={"dota-2"} fullPrice={199.9} discount={40} />
 
@@ -25,11 +38,13 @@ const App = () => {
         <div className="gameSession">
           <Subtitle>outros jogos</Subtitle>
           <div className="gameContainer">
-            <GameCard 
-            title={"CSGO"}
-            info={"Ação, estratégia, multijogador"}
-            price={99.90}
-            >Counter Strike Global Offensive</GameCard>
+            <GameCard
+              title={"CSGO"}
+              info={"Ação, estratégia, multijogador"}
+              price={99.9}
+            >
+              Counter Strike Global Offensive
+            </GameCard>
           </div>
         </div>
       </Container>
