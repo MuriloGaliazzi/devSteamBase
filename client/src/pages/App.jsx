@@ -5,7 +5,7 @@ import Subtitle from "../components/forms/subtitle/subtitle";
 import Nav from "../components/nav/Nav";
 import "./App.css";
 
-import { cartState } from "/src/atoms/cart";
+import { cartState } from "../atoms/cart";
 import { useRecoilState } from "recoil";
 
 const App = () => {
@@ -14,6 +14,7 @@ const App = () => {
   const handleAddProduct = (info) => {
     setCart([...cart, info]);
   };
+  console.log(cart);
   return (
     <div>
       <Nav />
@@ -23,13 +24,15 @@ const App = () => {
         <div className="saleContainer">
           <SaleCard
             title={"league-of-legends"}
-            fullPrice={199.9}
+            fullPrice={199.99}
             discount={30}
-            onAdd={() => handleAddProduct({
-              name: "League of Legends",
-              price: 99.9,
-              img: "league-of-legends"
-            })}
+            onAdd={() =>
+              handleAddProduct({
+                name: "League of Legends",
+                price: 199.99 - 199.99 *0.3,
+                img: "league-of-legends",
+              })
+            }
           />
           <SaleCard title={"dota-2"} fullPrice={199.9} discount={40} />
 
